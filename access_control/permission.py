@@ -1,0 +1,2 @@
+class Permission(str):
+    pass
