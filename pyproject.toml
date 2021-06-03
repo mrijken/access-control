@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "access_control"
 description = "Library for access control lists"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Marc Rijken <marc@rijken.org>"]
 license = "MIT"
 repository = "https://github.com/mrijken/access_control"
@@ -11,7 +11,7 @@ packages = [
 ]
 [tool.poetry.dependencies]
 python = ">=3.6,<4.0"
-subscribe = "^0.1.0"
+subscribe = ">=0.5.0"
 
 [tool.poetry.dev-dependencies]
 black = "^20.8b1"

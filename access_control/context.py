@@ -38,7 +38,7 @@ class ContextBase:
         Override this in a Context subclass when appropriate.
         """
         acl: ACL = []
-        for subscriber in self.acl_subscription_list.get_subscribers():
+        for subscriber in self.acl_subscription_list.subscribers:
             acl.extend(subscriber(self))
 
         return acl
@@ -104,23 +104,12 @@ class ObjectContext(ContextBase):
 
     def __init__(self, obj):
         self.obj = obj
-        super().__init__(acl_subscription_list=subscribe.ClassSubscriptionList(self.obj.__class__, "context_acl:"))
+        super().__init__(acl_subscription_list=subscribe.SuperClassSubscriptionList(self.obj.__class__, "context_acl:"))
 
     @property
     def parent(self) -> Optional[ContextBase]:
         parent_object = getattr(self.obj, self.parent_attribute_name, None)
         return self.__class__(parent_object) if parent_object else None
-
-
-class TenantContext(ObjectContext):
-
-    tenant_attribute_name = "tentant"
-
-    @property
-    def parent(self):
-        if not hasattr(self.obj, self.tenant_attribute_name):
-            return None
-        return self.__class__(getattr(self.obj, self.tenant_attribute_name))
 
 
 def get_permit(

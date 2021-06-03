@@ -91,7 +91,7 @@ When there is still no match, a DENY will be returned.
     ... def get_acl(context):
     ...     return [ac.acl.ACE(ac.permit.Permit.ALLOW, group_admin, edit_permission)]
 
-    And every can view everything.
+    And everyone can view everything.
 
     >>> @context_root.acl_subscription_list.subscribe()
     ... def get_acl(context):
